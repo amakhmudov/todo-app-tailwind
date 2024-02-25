@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bd {
+    border: 1px solid #f00;
+  }
+  html {
+    @apply bg-gray-100;
+  }
+
+  body {
+    @apply text-sm;
+  }
+
+  .container {
+    @apply max-w-xl mx-auto;
+  }
+
+  .todo {
+    @apply bg-white rounded shadow;
+  }
+
+  .todo__header {
+    @apply p-4 bg-primary rounded relative;
+  }
+
+  .todo__body {
+    @apply p-4 space-y-2 before:content-[''];
+  }
+
+  .todo__body:not(.todo__body--completed):empty:before {
+    content: "You don't have any work todo, relax :-)";
+
+    @apply block text-center;
+  }
+
+  .todo__title {
+    @apply text-white placeholder:text-white h-12 p-4 pr-16 rounded rounded-r-full bg-white/20 w-full;
+  }
+
+  .todo__create {
+    @apply w-12 h-12 rounded-full text-primary bg-white top-4 right-4 flex items-center justify-center absolute;
+  }
+
+  .todo__item {
+    @apply py-2 pl-4 bg-gray-100 rounded shadow flex items-center justify-between;
+  }
+
+  .todo__item p {
+    @apply line-clamp-1;
+  }
+
+  .todo__buttons {
+    @apply flex divide-x divide-gray-200;
+  }
+
+  .todo__buttons .btn {
+    @apply w-9 flex px-2 items-center justify-center relative transition;
+  }
+
+  .todo--delete {
+    @apply text-secondary/40 hover:text-secondary;
+  }
+
+  .todo--complete {
+    @apply text-primary/40 hover:text-primary;
+  }
+
+  .todo__body--completed {
+    @apply before:content-[''] before:w-6/12 before:absolute before:top-0 before:left-1/2 before:h-px before:-translate-x-1/2 before:bg-gray-100;
+  }
+
+  .todo__body--completed:empty:after {
+    content: "No todo items completed yet!";
+
+    @apply block text-center;
+  }
+
+  .todo__body--completed .todo__item {
+    @apply line-through;
+  }
+}

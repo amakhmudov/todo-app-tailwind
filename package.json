@@ -1,0 +1,26 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "todo app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./tailwind.css -o ./src/css/main.css --watch",
+    "start": "browser-sync start --config \"bs-config.js\"",
+    "dev-all": "npm-run-all --parallel dev start"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Alisher Makhmudov",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/line-clamp": "latest",
+    "autoprefixer": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "npm-run-all": "latest"
+  }
+}
