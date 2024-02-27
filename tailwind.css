@@ -23,11 +23,11 @@
   }
 
   .todo__header {
-    @apply p-4 bg-primary rounded relative;
+    @apply relative p-4 rounded bg-primary;
   }
 
   .todo__body {
-    @apply p-4 space-y-2 before:content-[''];
+    @apply p-4 space-y-4 before:content-[''];
   }
 
   .todo__body:not(.todo__body--completed):empty:before {
@@ -37,15 +37,35 @@
   }
 
   .todo__title {
-    @apply text-white placeholder:text-white h-12 p-4 pr-16 rounded rounded-r-full bg-white/20 w-full;
+    @apply w-full h-12 p-4 pl-4 pr-16 overflow-hidden text-white transition rounded-full outline-none placeholder:text-white bg-white/20;
+  }
+
+  .todo__header:focus-within .todo__title {
+    @apply shadow-xl;
   }
 
   .todo__create {
-    @apply w-12 h-12 rounded-full text-primary bg-white top-4 right-4 flex items-center justify-center absolute;
+    @apply absolute flex items-center justify-center w-12 h-12 bg-white rounded-full outline-none text-primary top-4 right-4;
+  }
+
+  .todo__create svg {
+    @apply w-6 h-6 transition;
+  }
+
+  .todo__create:focus svg {
+    @apply w-8 h-8 rotate-90;
   }
 
   .todo__item {
-    @apply py-2 pl-4 bg-gray-100 rounded shadow flex items-center justify-between;
+    @apply flex items-center justify-between px-4 py-2 bg-white rounded shadow;
+  }
+
+  .todo__item.is_completed {
+    @apply bg-gray-100;
+  }
+
+  .todo__item.is_completed p {
+    @apply line-through opacity-50;
   }
 
   .todo__item p {
@@ -53,22 +73,26 @@
   }
 
   .todo__buttons {
-    @apply flex divide-x divide-gray-200;
+    @apply flex space-x-2;
   }
 
   .todo__buttons .btn {
-    @apply w-9 flex px-2 items-center justify-center relative transition;
+    @apply relative flex items-center justify-center w-6 h-6 transition opacity-70 hover:opacity-100;
   }
 
   .todo--delete {
-    @apply text-secondary/40 hover:text-secondary;
+    background: url(../img/delete.svg) 50% 50% no-repeat;
   }
 
   .todo--complete {
-    @apply text-primary/40 hover:text-primary;
+    background: url(../img/check.svg) 50% 50% no-repeat;
   }
 
-  .todo__body--completed {
+  .todo__item.is_completed .todo--complete {
+    background: url(../img/uncheck.svg) 50% 50% no-repeat;
+  }
+
+  /* .todo__body--completed {
     @apply before:content-[''] before:w-6/12 before:absolute before:top-0 before:left-1/2 before:h-px before:-translate-x-1/2 before:bg-gray-100;
   }
 
@@ -80,5 +104,5 @@
 
   .todo__body--completed .todo__item {
     @apply line-through;
-  }
+  } */
 }

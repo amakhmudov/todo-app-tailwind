@@ -613,8 +613,8 @@ body {
 
 .todo__body > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .todo__body {
@@ -635,14 +635,21 @@ body {
 .todo__title {
   height: 3rem;
   width: 100%;
-  border-radius: 0.25rem;
-  border-top-right-radius: 9999px;
-  border-bottom-right-radius: 9999px;
+  overflow: hidden;
+  border-radius: 9999px;
   background-color: rgb(255 255 255 / 0.2);
   padding: 1rem;
+  padding-left: 1rem;
   padding-right: 4rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .todo__title::-moz-placeholder {
@@ -653,6 +660,12 @@ body {
 .todo__title::placeholder {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.todo__header:focus-within .todo__title {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .todo__create {
@@ -669,6 +682,25 @@ body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(93 184 150 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.todo__create svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.todo__create:focus svg {
+  height: 2rem;
+  width: 2rem;
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .todo__item {
@@ -677,13 +709,24 @@ body {
   justify-content: space-between;
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 1rem;
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.todo__item.is_completed {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.todo__item.is_completed p {
+  text-decoration-line: line-through;
+  opacity: 0.5;
 }
 
 .todo__item p {
@@ -698,21 +741,19 @@ body {
 }
 
 .todo__buttons > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-  --tw-divide-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .todo__buttons .btn {
   position: relative;
   display: flex;
-  width: 2.25rem;
+  height: 1.5rem;
+  width: 1.5rem;
   align-items: center;
   justify-content: center;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  opacity: 0.7;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -720,52 +761,44 @@ body {
   transition-duration: 150ms;
 }
 
-.todo--delete {
-  color: rgb(241 86 179 / 0.4);
+.todo__buttons .btn:hover {
+  opacity: 1;
 }
 
-.todo--delete:hover {
-  --tw-text-opacity: 1;
-  color: rgb(241 86 179 / var(--tw-text-opacity));
+.todo--delete {
+  background: url(../img/delete.svg) 50% 50% no-repeat;
 }
 
 .todo--complete {
-  color: rgb(93 184 150 / 0.4);
+  background: url(../img/check.svg) 50% 50% no-repeat;
 }
 
-.todo--complete:hover {
-  --tw-text-opacity: 1;
-  color: rgb(93 184 150 / var(--tw-text-opacity));
+.todo__item.is_completed .todo--complete {
+  background: url(../img/uncheck.svg) 50% 50% no-repeat;
 }
 
-.todo__body--completed::before {
+/* .todo__body--completed {
+    @apply before:content-[''] before:w-6/12 before:absolute before:top-0 before:left-1/2 before:h-px before:-translate-x-1/2 before:bg-gray-100;
+  }
+
+  .todo__body--completed:empty:after {
+    content: "No todo items completed yet!";
+
+    @apply block text-center;
+  }
+
+  .todo__body--completed .todo__item {
+    @apply line-through;
+  } */
+
+.sr-only {
   position: absolute;
-  top: 0px;
-  left: 50%;
+  width: 1px;
   height: 1px;
-  width: 50%;
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-  --tw-content: '';
-  content: var(--tw-content);
-}
-
-.todo__body--completed:empty:after {
-  content: "No todo items completed yet!";
-  display: block;
-  text-align: center;
-}
-
-.todo__body--completed .todo__item {
-  text-decoration-line: line-through;
-}
-
-.h-6 {
-  height: 1.5rem;
-}
-
-.w-6 {
-  width: 1.5rem;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
