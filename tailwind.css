@@ -52,12 +52,17 @@
     @apply w-6 h-6 transition;
   }
 
-  .todo__create:focus svg {
+  .todo__create:focus svg,
+  .todo__create:hover svg {
     @apply w-8 h-8 rotate-90;
   }
 
+  .todo__body {
+    @apply transition-all;
+  }
+
   .todo__item {
-    @apply flex items-center justify-between px-4 py-2 bg-white rounded shadow;
+    @apply flex items-center justify-between px-4 py-2 transition bg-white rounded shadow;
   }
 
   .todo__item.is_completed {
@@ -90,6 +95,10 @@
 
   .todo__item.is_completed .todo--complete {
     background: url(../img/uncheck.svg) 50% 50% no-repeat;
+  }
+
+  .todo__item--remove {
+    @apply duration-500 origin-top-left opacity-0 rotate-12;
   }
 
   /* .todo__body--completed {

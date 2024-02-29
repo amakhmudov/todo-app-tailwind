@@ -19,7 +19,10 @@ function todoButtons(parent) {
   parent.append(todoButtons);
 
   todoDelete.addEventListener("click", function (event) {
-    parent.remove();
+    parent.classList.add("todo__item--remove");
+    parent.addEventListener("transitionend", function () {
+      parent.remove();
+    });
   });
 
   todoComplete.addEventListener("click", function (event) {
