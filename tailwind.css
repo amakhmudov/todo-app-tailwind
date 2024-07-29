@@ -19,15 +19,16 @@
   }
 
   .todo {
-    @apply bg-white rounded shadow;
+    @apply my-6 bg-white rounded shadow;
   }
 
   .todo__header {
     @apply relative p-4 rounded bg-primary;
   }
 
-  .todo__body {
-    @apply p-4 space-y-4 before:content-[''];
+  .todo__body,
+  .todo__body--completed {
+    @apply p-4 space-y-4 before:content-[''] transition-all;
   }
 
   .todo__body:not(.todo__body--completed):empty:before {
@@ -55,10 +56,6 @@
   .todo__create:focus svg,
   .todo__create:hover svg {
     @apply w-8 h-8 rotate-90;
-  }
-
-  .todo__body {
-    @apply transition-all;
   }
 
   .todo__item {
@@ -101,8 +98,8 @@
     @apply duration-500 origin-top-left opacity-0 rotate-12;
   }
 
-  /* .todo__body--completed {
-    @apply before:content-[''] before:w-6/12 before:absolute before:top-0 before:left-1/2 before:h-px before:-translate-x-1/2 before:bg-gray-100;
+  .todo__body--completed {
+    @apply relative before:content-[''] before:w-6/12 before:absolute before:top-0 before:left-1/2 before:h-px before:-translate-x-1/2 before:bg-gray-100;
   }
 
   .todo__body--completed:empty:after {
@@ -113,5 +110,5 @@
 
   .todo__body--completed .todo__item {
     @apply line-through;
-  } */
+  }
 }

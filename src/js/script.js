@@ -1,54 +1,125 @@
+const todoForm = document.querySelector("#todo__form");
 const todoInput = document.querySelector(".todo__title");
 const todoButton = document.querySelector(".todo__create");
 const todoBody = document.querySelector(".todo__body");
 const todoBodyCompleted = document.querySelector(".todo__body--completed");
 
-function todoButtons(parent) {
-  const todoButtons = document.createElement("div");
-  todoButtons.classList.add("todo__buttons");
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-  const todoDelete = document.createElement("button");
-  todoDelete.classList.add("btn", "todo--delete");
-  todoDelete.innerHTML = '<span class="sr-only">todo delete</span>';
-
-  const todoComplete = document.createElement("button");
-  todoComplete.classList.add("btn", "todo--complete");
-  todoComplete.innerHTML = '<span class="sr-only">mark as completed</span>';
-
-  todoButtons.append(todoDelete, todoComplete);
-  parent.append(todoButtons);
-
-  todoDelete.addEventListener("click", function (event) {
-    parent.classList.add("todo__item--remove");
-    parent.addEventListener("transitionend", function () {
-      parent.remove();
-    });
-  });
-
-  todoComplete.addEventListener("click", function (event) {
-    parent.classList.toggle("is_completed");
+if (localStorage.getItem("tasks")) {
+  tasks.map((task) => {
+    createTask(task);
   });
 }
 
-function addTodo() {
-  if (todoInput.value === "") {
-    alert("Please add activity");
+todoForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const inputValue = todoInput.value;
+
+  if (inputValue === "") {
     return;
-  } else {
-    const li = document.createElement("li");
-    li.innerHTML = `<p>${todoInput.value}</p>`;
-    li.classList.add("todo__item");
-    todoButtons(li);
-    todoBody.prepend(li);
   }
-  todoInput.value = "";
+
+  const task = {
+    name: inputValue,
+    isCompleted: false,
+    id: new Date().getTime(),
+  };
+
+  tasks.push(task);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  createTask(task);
+
+  todoForm.reset();
+  todoInput.focus();
+});
+
+function createTask(task) {
+  const taskEl = document.createElement("li");
+
+  taskEl.setAttribute("id", task.id);
+  taskEl.setAttribute("class", "todo__item");
+
+  if (task.isCompleted) {
+    taskEl.classList.add("is_completed");
+  }
+
+  const taskElMarkup = `
+    <p>${task.name}</p>
+
+    <div class="todo__buttons">
+      <button class="btn todo--delete"><span class="sr-only">delete ${task.name} task</span></button>
+      <button class="btn todo--complete"><span class="sr-only">mark ${task.name} as completed</span></button>
+    </div>
+  `;
+
+  taskEl.innerHTML = taskElMarkup;
+
+  if (task.isCompleted) {
+    todoBodyCompleted.appendChild(taskEl);
+  } else {
+    todoBody.appendChild(taskEl);
+  }
 }
 
-function completeTodo() {}
+function removeTask(taskId) {
+  tasks = tasks.filter((task) => {
+    return task.id != parseInt(taskId);
+  });
 
-todoButton.addEventListener("click", addTodo);
-todoInput.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    addTodo();
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  document.getElementById(taskId).remove();
+}
+
+function completeTask(taskId) {
+  tasks = tasks.map((task) => {
+    if (task.id == parseInt(taskId)) {
+      task.isCompleted = !task.isCompleted;
+    }
+    return task;
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  document.getElementById(taskId).classList.toggle("is_completed");
+
+  const taskEl = document.getElementById(taskId);
+
+  if (taskEl.classList.contains("is_completed")) {
+    todoBodyCompleted.appendChild(taskEl);
+  } else {
+    todoBody.appendChild(taskEl);
+  }
+}
+
+todoBody.addEventListener("click", function (e) {
+  if (e.target.classList.contains("todo--delete")) {
+    const taskId = e.target.closest("li").id;
+
+    removeTask(taskId);
+  }
+
+  if (e.target.classList.contains("todo--complete")) {
+    const taskId = e.target.closest("li").id;
+
+    completeTask(taskId);
+  }
+});
+
+todoBodyCompleted.addEventListener("click", function (e) {
+  if (e.target.classList.contains("todo--delete")) {
+    const taskId = e.target.closest("li").id;
+
+    removeTask(taskId);
+  }
+
+  if (e.target.classList.contains("todo--complete")) {
+    const taskId = e.target.closest("li").id;
+
+    completeTask(taskId);
   }
 });

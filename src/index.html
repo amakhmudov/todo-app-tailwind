@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo app</title>
-    <link rel="stylesheet" href="css/main.css" />
-    <script src="js/script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="todo">
-        <div class="todo__header">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo app</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="todo">
+      <div class="todo__header">
+        <form id="todo__form">
           <input type="text" name="todo__title" id="todo__title" class="todo__title" placeholder="Enter an activity" />
 
-          <button class="btn todo__create" id="todo__create">
+          <button type="submit" class="btn todo__create" id="todo__create">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
-        </div>
-
-        <ul class="todo__body"></ul>
-
-        <!-- <ul class="todo__body todo__body--completed"></ul> -->
+        </form>
       </div>
+
+      <ul class="todo__body"></ul>
+
+      <ul class="todo__body--completed"></ul>
+
+      <!--
+      <li class="todo__item is_completed">
+        <p>Todo item</p>
+        <div class="todo__buttons">
+          <button class="btn todo--delete"><span class="sr-only">todo delete</span></button>
+          <button class="btn todo--complete"><span class="sr-only">mark as completed</span></button>
+        </div>
+      </li>
+      -->
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
